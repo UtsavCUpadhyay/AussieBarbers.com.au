@@ -2,11 +2,11 @@ import Link from "next/link";
 import { SITE } from "@/lib/site";
 
 const NAV = [
-  { href: "#how", label: "How it works" },
-  { href: "#services", label: "Services" },
-  { href: "#areas", label: "Areas" },
-  { href: "#solutions", label: "Business" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/services", label: "Services" },
+  { href: "/#how", label: "How it works" },
+  { href: "/#areas", label: "Areas" },
+  { href: "/#solutions", label: "Business" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export function SiteHeader() {

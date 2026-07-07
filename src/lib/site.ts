@@ -11,6 +11,14 @@ export const SITE = {
   tagline: "Premium mobile barbers, at your door.",
 };
 
+export function slugify(s: string): string {
+  return s
+    .toLowerCase()
+    .replace(/\(.*?\)/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 export type Service = {
   name: string;
   price: string;
@@ -189,3 +197,41 @@ export const STATS = [
   { value: "4.9★", label: "Average barber rating" },
   { value: "7 days", label: "Same-week availability" },
 ];
+
+// Suburbs we build dedicated local-SEO landing pages for.
+// Each becomes /mobile-barber/<slug> targeting "mobile barber <suburb>".
+export const SUBURBS = [
+  "New Farm",
+  "Fortitude Valley",
+  "West End",
+  "Paddington",
+  "Newstead",
+  "Teneriffe",
+  "Hamilton",
+  "Bulimba",
+  "Ascot",
+  "Toowong",
+  "South Brisbane",
+  "Kangaroo Point",
+  "Spring Hill",
+  "Chermside",
+  "Carindale",
+  "Brisbane City",
+];
+
+export type SuburbPage = {
+  suburb: string;
+  slug: string;
+};
+
+export function getSuburbPages(): SuburbPage[] {
+  return SUBURBS.map((s) => ({ suburb: s, slug: slugify(s) }));
+}
+
+export function getSuburbBySlug(slug: string): SuburbPage | undefined {
+  return getSuburbPages().find((s) => s.slug === slug);
+}
+
+export function getServiceBySlug(slug: string): Service | undefined {
+  return SERVICES.find((s) => slugify(s.name) === slug);
+}
