@@ -13,12 +13,12 @@ export function SiteFooter() {
       ],
     },
     {
-      title: "For business",
+      title: "Explore",
       links: [
-        ["Weddings", "#solutions"],
-        ["Corporate", "#solutions"],
-        ["Hotels", "#solutions"],
-        ["Events", "#solutions"],
+        ["Membership", "/membership"],
+        ["Gift cards", "/gift-cards"],
+        ["Corporate", "/corporate"],
+        ["Weddings", "/weddings"],
       ],
     },
     {

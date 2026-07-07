@@ -7,7 +7,17 @@ const BASE = "https://aussiebarbers.com.au";
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticPaths = ["", "/book", "/barbers", "/services", "/blog"];
+  const staticPaths = [
+    "",
+    "/book",
+    "/barbers",
+    "/services",
+    "/blog",
+    "/membership",
+    "/gift-cards",
+    "/corporate",
+    "/weddings",
+  ];
   const servicePaths = SERVICES.map((s) => `/services/${slugify(s.name)}`);
   const suburbPaths = getSuburbPages().map((s) => `/mobile-barber/${s.slug}`);
   const barberPaths = BARBERS.map((b) => `/barber/${b.slug}`);

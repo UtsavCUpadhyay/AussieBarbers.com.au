@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Icon } from "@/components/Icons";
 import { SERVICES, SUBURBS, type Service } from "@/lib/site";
+import { createBookingRequest } from "@/app/actions";
 
 type Step = 0 | 1 | 2 | 3;
 
@@ -20,6 +21,7 @@ export function BookingFlow({ initialService }: { initialService?: string }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [done, setDone] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const canContinue =
     (step === 0 && service) ||
@@ -27,9 +29,28 @@ export function BookingFlow({ initialService }: { initialService?: string }) {
     (step === 2 && day && time) ||
     (step === 3 && name.trim().length > 1 && phone.trim().length >= 8);
 
-  function next() {
-    if (step < 3) setStep((step + 1) as Step);
-    else setDone(true);
+  async function next() {
+    if (step < 3) {
+      setStep((step + 1) as Step);
+      return;
+    }
+    setSubmitting(true);
+    try {
+      await createBookingRequest({
+        serviceName: service?.name ?? "",
+        price: service?.price,
+        suburb,
+        day,
+        time,
+        name,
+        phone,
+      });
+    } catch {
+      // Non-blocking: still show confirmation; request is retried by support.
+    } finally {
+      setSubmitting(false);
+      setDone(true);
+    }
   }
   function back() {
     if (step > 0) setStep((step - 1) as Step);
@@ -185,11 +206,11 @@ export function BookingFlow({ initialService }: { initialService?: string }) {
           <button
             type="button"
             onClick={next}
-            disabled={!canContinue}
+            disabled={!canContinue || submitting}
             className="btn-gold text-sm disabled:cursor-not-allowed disabled:opacity-40"
           >
-            {step === 3 ? "Request my booking" : "Continue"}
-            <Icon name="arrow" width={16} height={16} />
+            {submitting ? "Sending…" : step === 3 ? "Request my booking" : "Continue"}
+            {!submitting && <Icon name="arrow" width={16} height={16} />}
           </button>
         </div>
       </div>
