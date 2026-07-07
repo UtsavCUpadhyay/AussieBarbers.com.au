@@ -235,3 +235,126 @@ export function getSuburbBySlug(slug: string): SuburbPage | undefined {
 export function getServiceBySlug(slug: string): Service | undefined {
   return SERVICES.find((s) => slugify(s.name) === slug);
 }
+
+// ---- Barber roster (sample profiles for launch; real barbers replace these) ----
+export type Barber = {
+  name: string;
+  slug: string;
+  initials: string;
+  rating: number;
+  reviews: number;
+  cuts: string;
+  years: number;
+  suburb: string;
+  specialties: string[];
+  bio: string;
+};
+
+export const BARBERS: Barber[] = [
+  {
+    name: "Marco Rossi",
+    slug: "marco-rossi",
+    initials: "MR",
+    rating: 4.9,
+    reviews: 214,
+    cuts: "1,800+",
+    years: 9,
+    suburb: "New Farm",
+    specialties: ["Skin fades", "Beard sculpts", "Classic cuts"],
+    bio: "Nine years behind the chair, from Sydney's east to Brisbane's inner north. Marco is known for razor-sharp fades and a calm, unhurried chair-side manner.",
+  },
+  {
+    name: "Jayden Cole",
+    slug: "jayden-cole",
+    initials: "JC",
+    rating: 4.9,
+    reviews: 176,
+    cuts: "1,400+",
+    years: 7,
+    suburb: "West End",
+    specialties: ["Textured crops", "Scissor work", "Kids cuts"],
+    bio: "A West End local with a light touch and an eye for modern, textured styles. Jayden's patient, friendly approach makes him a favourite for families.",
+  },
+  {
+    name: "Sam Whitfield",
+    slug: "sam-whitfield",
+    initials: "SW",
+    rating: 5.0,
+    reviews: 132,
+    cuts: "1,100+",
+    years: 11,
+    suburb: "Ascot",
+    specialties: ["Wedding grooming", "Hot-towel shaves", "Executive cuts"],
+    bio: "Eleven years of craft, specialising in weddings and the full VIP groom. Sam brings a polished, five-star experience to every appointment.",
+  },
+  {
+    name: "Leo Nguyen",
+    slug: "leo-nguyen",
+    initials: "LN",
+    rating: 4.8,
+    reviews: 158,
+    cuts: "1,300+",
+    years: 6,
+    suburb: "Fortitude Valley",
+    specialties: ["Fades", "Line-ups", "Colour"],
+    bio: "Fast, precise and always on trend. Leo is the go-to for crisp line-ups and bold, contemporary looks around the Valley and CBD.",
+  },
+];
+
+export function getBarberBySlug(slug: string): Barber | undefined {
+  return BARBERS.find((b) => b.slug === slug);
+}
+
+// ---- Reviews ----
+export type Review = {
+  name: string;
+  suburb: string;
+  rating: number;
+  text: string;
+  service: string;
+};
+
+export const REVIEWS: Review[] = [
+  {
+    name: "Daniel K.",
+    suburb: "Teneriffe",
+    rating: 5,
+    text: "Booked a cut + beard for 7am before work — barber turned up early, setup took two minutes and the fade was the best I've had in Brisbane. Game changer.",
+    service: "Cut + Beard",
+  },
+  {
+    name: "Priya S.",
+    suburb: "Paddington",
+    rating: 5,
+    text: "Got my two boys done at home on a Sunday. No meltdowns, no waiting room, both cuts spot on. Will absolutely rebook.",
+    service: "Kids Cut",
+  },
+  {
+    name: "Tom R.",
+    suburb: "Ascot",
+    rating: 5,
+    text: "Had Sam do the groomsmen on my wedding morning. Professional, punctual, and everyone looked sharp in the photos. Cannot recommend enough.",
+    service: "Wedding grooming",
+  },
+  {
+    name: "Michael O.",
+    suburb: "Brisbane City",
+    rating: 5,
+    text: "The convenience is unreal. Booking took under a minute, tracked his arrival like an Uber, paid in the app. This is how barbering should work.",
+    service: "Signature Cut",
+  },
+  {
+    name: "James L.",
+    suburb: "Bulimba",
+    rating: 4,
+    text: "Great cut and lovely bloke. Ran ten minutes late but messaged ahead, so no drama. Quality was well worth it.",
+    service: "Skin Fade",
+  },
+  {
+    name: "Anh T.",
+    suburb: "West End",
+    rating: 5,
+    text: "Signed up for the monthly membership after my first cut. Always sharp, never have to think about it. Best subscription I have.",
+    service: "The Groom (VIP)",
+  },
+];

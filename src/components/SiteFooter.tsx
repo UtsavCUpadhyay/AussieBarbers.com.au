@@ -25,8 +25,8 @@ export function SiteFooter() {
       title: "Company",
       links: [
         ["Become a barber", "/barbers"],
-        ["Service areas", "#areas"],
-        ["FAQ", "#faq"],
+        ["The Chair (blog)", "/blog"],
+        ["Service areas", "/#areas"],
         ["Contact", `mailto:${SITE.email}`],
       ],
     },

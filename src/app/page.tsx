@@ -2,6 +2,7 @@ import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Icon } from "@/components/Icons";
+import { Avatar, Stars } from "@/components/Bits";
 import {
   SITE,
   SERVICES,
@@ -11,6 +12,8 @@ import {
   SOLUTIONS,
   FAQS,
   STATS,
+  BARBERS,
+  REVIEWS,
 } from "@/lib/site";
 
 export default function Home() {
@@ -23,6 +26,8 @@ export default function Home() {
         <Benefits />
         <HowItWorks />
         <Services />
+        <Barbers />
+        <Reviews />
         <Areas />
         <Solutions />
         <Membership />
@@ -219,6 +224,67 @@ function Services() {
       <p className="mt-8 text-center text-sm text-muted-2">
         Student &amp; senior discounts available · Family &amp; group bookings on request
       </p>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------- Barbers */
+function Barbers() {
+  return (
+    <section id="barbers" className="border-y border-line bg-ink-2 py-20 md:py-28">
+      <div className="container-x">
+        <SectionHead
+          eyebrow="Meet the barbers"
+          title="Vetted pros you can trust"
+          sub="Every barber is ID-verified, qualification-checked, police-checked and insured. Rated by real Brisbane locals."
+        />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {BARBERS.map((b) => (
+            <Link key={b.slug} href={`/barber/${b.slug}`} className="card flex flex-col items-center p-6 text-center">
+              <Avatar initials={b.initials} size={72} />
+              <h3 className="mt-4 font-display text-lg font-semibold">{b.name}</h3>
+              <p className="mt-1 flex items-center gap-1.5 text-sm text-muted">
+                <Stars rating={b.rating} /> {b.rating}
+              </p>
+              <p className="mt-1 text-xs text-muted-2">{b.suburb} · {b.cuts} cuts</p>
+              <div className="mt-3 flex flex-wrap justify-center gap-1.5">
+                {b.specialties.slice(0, 2).map((s) => (
+                  <span key={s} className="rounded-full bg-gold-soft px-2.5 py-1 text-[0.65rem] text-gold">
+                    {s}
+                  </span>
+                ))}
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------- Reviews */
+function Reviews() {
+  return (
+    <section className="container-x py-20 md:py-28">
+      <SectionHead
+        eyebrow="Loved by locals"
+        title="4.9 stars across Brisbane"
+        sub="Real reviews from real customers who'll never go back to the barbershop queue."
+      />
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {REVIEWS.map((r) => (
+          <figure key={r.name} className="card p-6">
+            <Stars rating={r.rating} size={16} />
+            <blockquote className="mt-3 text-sm leading-relaxed text-cream/90">
+              &ldquo;{r.text}&rdquo;
+            </blockquote>
+            <figcaption className="mt-4 text-sm text-muted">
+              <span className="font-medium text-cream">{r.name}</span> · {r.suburb}
+              <span className="mt-0.5 block text-xs text-muted-2">{r.service}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
     </section>
   );
 }
