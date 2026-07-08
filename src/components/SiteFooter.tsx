@@ -26,7 +26,7 @@ export function SiteFooter() {
       links: [
         ["About us", "/about"],
         ["Member portal", "/portal"],
-        ["Become a barber", "/barbers"],
+        ["Careers", "/careers"],
         ["The Chair (blog)", "/blog"],
         ["Contact", "/contact"],
       ],

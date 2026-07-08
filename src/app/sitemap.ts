@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     "/membership",
     "/portal",
+    "/careers",
     "/gift-cards",
     "/corporate",
     "/weddings",
