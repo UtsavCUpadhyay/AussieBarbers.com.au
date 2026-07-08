@@ -8,12 +8,14 @@ import {
   SERVICES,
   BENEFITS,
   STEPS,
-  AREAS,
   SOLUTIONS,
   FAQS,
   STATS,
   BARBERS,
   REVIEWS,
+  REGIONS,
+  FEATURED_SUBURBS,
+  slugify,
 } from "@/lib/site";
 
 export default function Home() {
@@ -298,21 +300,32 @@ function Areas() {
           <SectionHead
             align="left"
             eyebrow="Service areas"
-            title="Covering Greater Brisbane"
-            sub="We're rolling out suburb by suburb. Gold Coast and Sunshine Coast are next — join the waitlist and we'll bring the chair to you."
+            title="Brisbane & the Gold Coast"
+            sub="Barbers across 240+ suburbs — from Greater Brisbane to the Gold Coast, Coolangatta to Coomera. Find yours and book in seconds."
           />
+          <div className="mt-6 flex flex-wrap gap-3">
+            {REGIONS.map((r) => (
+              <span
+                key={r.slug}
+                className="rounded-full border border-gold/30 bg-gold-soft px-4 py-2 text-sm font-medium text-gold"
+              >
+                {r.name} · {r.suburbs.length} suburbs
+              </span>
+            ))}
+          </div>
           <Link href="/book" className="btn-gold mt-8">
             Check your suburb <Icon name="arrow" width={18} height={18} />
           </Link>
         </div>
         <div className="flex flex-wrap gap-2.5">
-          {AREAS.map((a) => (
-            <span
+          {FEATURED_SUBURBS.map((a) => (
+            <Link
               key={a}
+              href={`/mobile-barber/${slugify(a)}`}
               className="rounded-full border border-line bg-surface px-4 py-2 text-sm text-muted transition-colors hover:border-gold/40 hover:text-cream"
             >
               {a}
-            </span>
+            </Link>
           ))}
         </div>
       </div>

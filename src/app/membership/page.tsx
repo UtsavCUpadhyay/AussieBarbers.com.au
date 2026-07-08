@@ -93,6 +93,20 @@ export default function MembershipPage() {
               </div>
             ))}
           </div>
+          <div className="glass mx-auto mt-12 max-w-3xl rounded-2xl p-6 text-center sm:p-8">
+            <span className="eyebrow">Rewards for everyone</span>
+            <h2 className="mt-3 font-display text-2xl font-semibold sm:text-3xl">
+              Earn points on every cut
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm text-muted">
+              Member or not, every haircut earns you 5 points — hit 20 and your
+              next cut is free. Track it all in your member portal.
+            </p>
+            <Link href="/portal" className="btn-ghost mt-6">
+              Open the member portal <Icon name="arrow" width={16} height={16} />
+            </Link>
+          </div>
+
           <p className="mt-8 text-center text-sm text-muted-2">
             Unused monthly cuts roll over for 60 days · Pause anytime · No lock-in contract
           </p>

@@ -4,9 +4,9 @@ import { SITE } from "@/lib/site";
 const NAV = [
   { href: "/services", label: "Services" },
   { href: "/membership", label: "Membership" },
+  { href: "/portal", label: "Rewards" },
   { href: "/corporate", label: "Business" },
   { href: "/blog", label: "Blog" },
-  { href: "/#faq", label: "FAQ" },
 ];
 
 export function SiteHeader() {

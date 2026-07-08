@@ -24,10 +24,11 @@ export function SiteFooter() {
     {
       title: "Company",
       links: [
+        ["About us", "/about"],
+        ["Member portal", "/portal"],
         ["Become a barber", "/barbers"],
         ["The Chair (blog)", "/blog"],
-        ["Service areas", "/#areas"],
-        ["Contact", `mailto:${SITE.email}`],
+        ["Contact", "/contact"],
       ],
     },
   ];
