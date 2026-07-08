@@ -14,9 +14,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/blog",
     "/membership",
+    "/portal",
+    "/careers",
     "/gift-cards",
     "/corporate",
     "/weddings",
+    "/about",
+    "/contact",
+    "/privacy",
+    "/terms",
   ];
   const servicePaths = SERVICES.map((s) => `/services/${slugify(s.name)}`);
   const suburbPaths = getSuburbPages().map((s) => `/mobile-barber/${s.slug}`);

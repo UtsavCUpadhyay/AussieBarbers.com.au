@@ -45,7 +45,7 @@ export default function BarbersPage() {
               skills — we&apos;ll bring the clients, the tools and the brand.
             </p>
             <div className="mt-8 flex justify-center">
-              <Link href="/book" className="btn-gold">
+              <Link href="/careers" className="btn-gold">
                 Apply to join <Icon name="arrow" width={18} height={18} />
               </Link>
             </div>

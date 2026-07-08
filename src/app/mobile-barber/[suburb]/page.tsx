@@ -28,7 +28,7 @@ export async function generateMetadata({
   const title = `Mobile Barber ${page.suburb} — Haircuts & Fades to Your Door`;
   return {
     title,
-    description: `Book a verified mobile barber in ${page.suburb}, Brisbane. Sharp cuts, skin fades and beard trims at your home or office — from $40. Same-day slots available.`,
+    description: `Book a verified mobile barber in ${page.suburb}, ${page.region}. Sharp cuts, skin fades and beard trims at your home or office — from $40. Same-day slots available.`,
     alternates: { canonical: `https://aussiebarbers.com.au/mobile-barber/${suburb}` },
     openGraph: { title, type: "website" },
   };
@@ -44,15 +44,15 @@ export default async function SuburbPage({
   if (!page) notFound();
 
   const nearby = getSuburbPages()
-    .filter((s) => s.slug !== page.slug)
-    .slice(0, 8);
+    .filter((s) => s.regionSlug === page.regionSlug && s.slug !== page.slug)
+    .slice(0, 10);
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: `${SITE.name} — ${page.suburb}`,
-    description: `Mobile barber serving ${page.suburb}, Brisbane. Verified, insured barbers to your door.`,
-    areaServed: { "@type": "Place", name: `${page.suburb}, Brisbane, QLD` },
+    description: `Mobile barber serving ${page.suburb}, ${page.region}. Verified, insured barbers to your door.`,
+    areaServed: { "@type": "Place", name: `${page.suburb}, ${page.region}, QLD` },
     url: `https://aussiebarbers.com.au/mobile-barber/${suburb}`,
     priceRange: "$$",
   };
@@ -127,7 +127,7 @@ export default async function SuburbPage({
         {/* Nearby */}
         <section className="border-t border-line bg-ink-2 py-16 md:py-20">
           <div className="container-x">
-            <h2 className="font-display text-2xl font-semibold sm:text-3xl">Nearby areas we cover</h2>
+            <h2 className="font-display text-2xl font-semibold sm:text-3xl">Nearby {page.region} areas we cover</h2>
             <div className="mt-6 flex flex-wrap gap-2.5">
               {nearby.map((s) => (
                 <Link

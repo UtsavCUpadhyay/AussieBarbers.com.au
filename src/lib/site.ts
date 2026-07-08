@@ -198,39 +198,129 @@ export const STATS = [
   { value: "7 days", label: "Same-week availability" },
 ];
 
-// Suburbs we build dedicated local-SEO landing pages for.
-// Each becomes /mobile-barber/<slug> targeting "mobile barber <suburb>".
-export const SUBURBS = [
-  "New Farm",
-  "Fortitude Valley",
-  "West End",
-  "Paddington",
-  "Newstead",
-  "Teneriffe",
-  "Hamilton",
-  "Bulimba",
-  "Ascot",
-  "Toowong",
-  "South Brisbane",
-  "Kangaroo Point",
-  "Spring Hill",
-  "Chermside",
-  "Carindale",
-  "Brisbane City",
+// ---- Service regions & suburbs -------------------------------------------
+// Every suburb becomes /mobile-barber/<slug> targeting "mobile barber <suburb>".
+// Brisbane = launch region (live). Gold Coast = expansion region (bookable).
+
+export type Region = {
+  name: string;
+  slug: string;
+  tagline: string;
+  suburbs: string[];
+};
+
+const BRISBANE_SUBURBS = [
+  "Acacia Ridge", "Albion", "Alderley", "Algester", "Annerley", "Anstead",
+  "Archerfield", "Ascot", "Ashgrove", "Aspley", "Auchenflower", "Bald Hills",
+  "Balmoral", "Banyo", "Bardon", "Bellbowrie", "Belmont", "Boondall",
+  "Bowen Hills", "Bracken Ridge", "Bridgeman Downs", "Brighton", "Brisbane City",
+  "Brookfield", "Bulimba", "Burbank", "Calamvale", "Camp Hill", "Cannon Hill",
+  "Carina", "Carina Heights", "Carindale", "Carseldine", "Chandler",
+  "Chapel Hill", "Chelmer", "Chermside", "Chermside West", "Clayfield",
+  "Coopers Plains", "Coorparoo", "Corinda", "Darra", "Deagon", "Doolandella",
+  "Drewvale", "Durack", "Dutton Park", "East Brisbane", "Eight Mile Plains",
+  "Ellen Grove", "Enoggera", "Everton Park", "Fairfield", "Ferny Grove",
+  "Fig Tree Pocket", "Fitzgibbon", "Forest Lake", "Fortitude Valley",
+  "Gaythorne", "Geebung", "Gordon Park", "Graceville", "Grange", "Greenslopes",
+  "Gumdale", "Hamilton", "Hawthorne", "Heathwood", "Hemmant", "Hendra",
+  "Herston", "Highgate Hill", "Holland Park", "Holland Park West", "Inala",
+  "Indooroopilly", "Jamboree Heights", "Jindalee", "Kalinga", "Kangaroo Point",
+  "Karana Downs", "Kedron", "Kelvin Grove", "Kenmore", "Kenmore Hills",
+  "Keperra", "Kuraby", "Larapinta", "Lota", "Lutwyche", "Macgregor",
+  "Mackenzie", "Manly", "Manly West", "Mansfield", "McDowall", "Middle Park",
+  "Milton", "Mitchelton", "Moggill", "Moorooka", "Morningside", "Mount Gravatt",
+  "Mount Gravatt East", "Mount Ommaney", "Murarrie", "Nathan", "New Farm",
+  "Newmarket", "Newstead", "Norman Park", "Northgate", "Nudgee", "Nundah",
+  "Oxley", "Paddington", "Pallara", "Parkinson", "Petrie Terrace",
+  "Pinjarra Hills", "Pinkenba", "Pullenvale", "Ransome", "Red Hill",
+  "Richlands", "Riverhills", "Robertson", "Rochedale", "Rocklea", "Runcorn",
+  "Salisbury", "Sandgate", "Seven Hills", "Seventeen Mile Rocks", "Sherwood",
+  "Shorncliffe", "Sinnamon Park", "South Brisbane", "Spring Hill", "St Lucia",
+  "Stafford", "Stafford Heights", "Stretton", "Sumner", "Sunnybank",
+  "Sunnybank Hills", "Taigum", "Taringa", "Tarragindi", "Teneriffe",
+  "Tennyson", "The Gap", "Tingalpa", "Toowong", "Upper Kedron",
+  "Upper Mount Gravatt", "Virginia", "Wacol", "Wakerley", "Wavell Heights",
+  "West End", "Westlake", "Willawong", "Wilston", "Windsor", "Wishart",
+  "Woolloongabba", "Wooloowin", "Wynnum", "Wynnum West", "Yeerongpilly",
+  "Yeronga", "Zillmere",
+];
+
+const GOLD_COAST_SUBURBS = [
+  "Surfers Paradise", "Broadbeach", "Broadbeach Waters", "Main Beach",
+  "Southport", "Labrador", "Biggera Waters", "Runaway Bay", "Hollywell",
+  "Coombabah", "Paradise Point", "Hope Island", "Helensvale", "Oxenford",
+  "Pacific Pines", "Nerang", "Carrara", "Ashmore", "Benowa", "Bundall",
+  "Molendinar", "Parkwood", "Arundel", "Mermaid Beach", "Mermaid Waters",
+  "Nobby Beach", "Miami", "Burleigh Heads", "Burleigh Waters", "Palm Beach",
+  "Elanora", "Currumbin", "Currumbin Waters", "Tugun", "Bilinga",
+  "Coolangatta", "Kirra", "Robina", "Varsity Lakes", "Clear Island Waters",
+  "Merrimac", "Worongary", "Mudgeeraba", "Tallai", "Reedy Creek", "Bonogin",
+  "Highland Park", "Gaven", "Maudsland", "Upper Coomera", "Coomera",
+  "Willow Vale", "Pimpama", "Ormeau", "Jacobs Well", "Tallebudgera",
+  "Tallebudgera Valley", "Currumbin Valley", "Springbrook", "Mount Nathan",
+];
+
+export const REGIONS: Region[] = [
+  {
+    name: "Brisbane",
+    slug: "brisbane",
+    tagline: "Our launch city — barbers live across Greater Brisbane.",
+    suburbs: BRISBANE_SUBURBS,
+  },
+  {
+    name: "Gold Coast",
+    slug: "gold-coast",
+    tagline: "Now taking bookings from Coolangatta to Coomera.",
+    suburbs: GOLD_COAST_SUBURBS,
+  },
+];
+
+// Flat list used by the booking form's suburb autocomplete.
+export const SUBURBS = REGIONS.flatMap((r) => r.suburbs);
+
+// A short mixed sample for the homepage "areas" chips.
+export const FEATURED_SUBURBS = [
+  "New Farm", "West End", "Fortitude Valley", "Bulimba", "Ascot", "Paddington",
+  "Chermside", "Carindale", "Surfers Paradise", "Broadbeach", "Southport",
+  "Burleigh Heads", "Robina", "Palm Beach",
 ];
 
 export type SuburbPage = {
   suburb: string;
   slug: string;
+  region: string;
+  regionSlug: string;
 };
 
 export function getSuburbPages(): SuburbPage[] {
-  return SUBURBS.map((s) => ({ suburb: s, slug: slugify(s) }));
+  return REGIONS.flatMap((r) =>
+    r.suburbs.map((s) => ({
+      suburb: s,
+      slug: slugify(s),
+      region: r.name,
+      regionSlug: r.slug,
+    }))
+  );
 }
 
 export function getSuburbBySlug(slug: string): SuburbPage | undefined {
   return getSuburbPages().find((s) => s.slug === slug);
 }
+
+export function getRegionBySlug(slug: string): Region | undefined {
+  return REGIONS.find((r) => r.slug === slug);
+}
+
+// ---- Loyalty / membership rewards ----------------------------------------
+// Earn POINTS_PER_VISIT per completed haircut. At POINTS_FOR_REWARD points
+// (i.e. after PAID_VISITS_FOR_REWARD paid visits) the next cut is free.
+// Non-transferable: rewards are tied to the individual member.
+export const LOYALTY = {
+  pointsPerVisit: 5,
+  pointsForReward: 20,
+  paidVisitsForReward: 4, // 4 paid cuts → 5th cut free
+  rewardLabel: "Free haircut",
+} as const;
 
 export function getServiceBySlug(slug: string): Service | undefined {
   return SERVICES.find((s) => slugify(s.name) === slug);
